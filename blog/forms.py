@@ -75,8 +75,8 @@ SECURITY_CHOICES = [
 class DurationForm(forms.Form):
     duration = forms.CharField(
     widget=forms.RadioSelect(choices=DURATION_CHOICES, attrs={'class' : 'form-group radio_input icheck required'}))
-    latitude = forms.FloatField(label='latitude')
-    longitude = forms.FloatField(label='longitude')
+    latitude = forms.FloatField(required=False)
+    longitude = forms.FloatField(required=False)
 
      # myfield = forms.CharField(widget=forms.TextInput(attrs={'class' : 'myfieldclass'}))
      # form.fields['field_name'].widget = forms.HiddenInput()

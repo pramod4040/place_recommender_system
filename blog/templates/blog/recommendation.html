@@ -18,7 +18,7 @@
 	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="iimg/apple-touch-icon-144x144-precomposed.png{% static '' %}">
 
 	<!-- GOOGLE WEB FONT -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet"> -->
 
 	<!-- BASE CSS -->
 	<link href="{% static 'ccss/animate.min.css' %}" rel="stylesheet">
@@ -100,7 +100,7 @@
 						<figure><img src="{% static 'iimg/registration_bg.svg' %}" alt=""></figure>
 						<h2>Questionaire</h2>
 						<p><u>Provide us a genuine answer</u>.<br> so that the recommendations will be relavent.</p>
-						
+
 					</div>
 				</div>
 				<div class="col-lg-7">
@@ -239,7 +239,7 @@
 
 								<div class="submit step">
 									<h3 class="main_question"><strong>5/5</strong>Provide your <b>appropriate range.</b></h3>
-									
+
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
@@ -253,7 +253,7 @@
 													<option value="5">20°C</option>
 												</select> {% endcomment %}
 												{{form.temperature}}
-												
+
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -282,7 +282,7 @@
 										</div>
 									</div>
 
-								 	
+
 									<!-- /row -->
 
 									<!-- <div class="row">
@@ -351,43 +351,7 @@
 
 	<!-- recommendation script -->
 	<script type="text/javascript" src="{% static 'jjs/recommendation/distance.js' %}"></script>
-	<script>
-		var slider1 = document.getElementById("myRange1");
-		var slider2 = document.getElementById("myRange2");
-		var slider3 = document.getElementById("myRange3");
-		var slider4 = document.getElementById("myRange4");
-		var output1 = document.getElementById("demo1");
-		var output2 = document.getElementById("demo2");
-		var output3 = document.getElementById("demo3");
-		var output4 = document.getElementById("demo4");
 
-		output1.innerHTML = slider1.value;
-
-		slider1.oninput = function() {
-		  output1.innerHTML = this.value;
-		}
-
-		output2.innerHTML = slider2.value;
-
-		slider2.oninput = function() {
-		  output2.innerHTML = this.value;
-		}
-
-		output3.innerHTML = slider3.value;
-
-		slider3.oninput = function() {
-		  output3.innerHTML = this.value;
-		}
-
-		output4.innerHTML = slider4.value;
-
-		slider4.oninput = function() {
-		  output4.innerHTML = this.value;
-		}
-
-
-
-</script>
 
 
 </body>

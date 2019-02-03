@@ -187,8 +187,12 @@ def Recommendation(request):
 
 def r_result(request):
     if request.method == 'POST':
+        print('aayo')
         form = DurationForm(request.POST)
+        print(form.errors)
+        print(form.non_field_errors)
         if form.is_valid():
+            print('ok to go')
             temperature = form.cleaned_data['temperature']
             altitude = form.cleaned_data['altitude']
             difficulty = form.cleaned_data['difficulty']
@@ -200,42 +204,61 @@ def r_result(request):
             hamro = form.cleaned_data['duration']
             latitude = form.cleaned_data['latitude']
             longitude = form.cleaned_data['longitude']
+            print('latitude')
+            print(latitude)
+            print(longitude)
             data = []
-            for place in places:
-                R = 6373.0
-                name = place.title
-                lat1 = radians(place.latitude)
-                lon1 = radians(place.longitude)
-                lat2 = radians(latitude)
-                lon2 = radians(longitude)
+            try:
+                for place in places:
+                    R = 6373.0
+                    name = place.title
+                    lat1 = radians(place.latitude)
+                    lon1 = radians(place.longitude)
+                    print(latitude)
+                    lat2 = radians(latitude)
+                    lon2 = radians(longitude)
+                    print(lat1)
 
-                dlon = lon2 - lon1
-                dlat = lat2 - lat1
+                    dlon = lon2 - lon1
+                    dlat = lat2 - lat1
 
-                a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
-                c = 2 * atan2(sqrt(a), sqrt(1 - a))
+                    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+                    c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
-                distance = R * c
+                    distance = R * c
 
-                if distance <= int(hamro):
-                    data.append(name)
+                    if distance <= int(hamro):
+                        data.append(name)
+            except TypeError:
+                print("May be GPS is not ON. Please Trun it ON")
 
-            send = {'trekking':trekking, 'destination': destination, 'accomodation': accomodation}
-            #temperature, altitude, difficulty, security
-            data_for_cosine = [temperature, altitude, difficulty, security]
-            # {'temperature': temperature, 'altitude': altitude, 'difficulty': difficulty, 'security': security}
-            print(data_for_cosine)
-            filteredplaces = FilterPlacesRadioInput(send)
+            finally:
+                send = {'trekking':trekking, 'destination': destination, 'accomodation': accomodation}
+                #temperature, altitude, difficulty, security
+                data_for_cosine = [temperature, altitude, difficulty, security]
+                # {'temperature': temperature, 'altitude': altitude, 'difficulty': difficulty, 'security': security}
+                print(data_for_cosine)
+                filteredplaces = FilterPlacesRadioInput(send)
+                print('data')
+                print(data)
 
-            common = set(data).intersection(set(filteredplaces))
+                if len(data) == 0:
+                    cosine_data = ApplyCosineSimi(data_for_cosine, filteredplaces)
+                    finaldestination = Destination.objects.filter(title__in = filteredplaces)
+                    print(cosine_data)
 
-            cosine_data = ApplyCosineSimi(data_for_cosine, common)
-            finaldestination = Destination.objects.filter(title__in = common)
-            gogo = {'places': finaldestination, 'cosine': cosine_data}
-            return render(request, 'blog/r_result.html', gogo)
-    else:
-        form = DurationForm()
-    return HttpResponseRedirect('/recommendation/')
+                else:
+                    common = set(data).intersection(set(filteredplaces))
+                    print('common')
+                    print(common)
+
+                    cosine_data = ApplyCosineSimi(data_for_cosine, common)
+                    finaldestination = Destination.objects.filter(title__in = common)
+                gogo = {'places': finaldestination, 'cosine': cosine_data}
+                return render(request, 'blog/r_result.html', gogo)
+        else:
+            form = DurationForm()
+            return HttpResponseRedirect('/recommendation/')
 
 
 def post(request):
