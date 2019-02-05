@@ -1,6 +1,6 @@
 astroid==2.1.0
 colorama==0.4.1
-Django==2.1.4
+Django==2.0
 django-bootstrap3==11.0.0
 django-multiselectfield==0.1.8
 django-summernote==0.8.11.4

@@ -34,15 +34,16 @@ from scipy import spatial
     # return uniq_list
 
 #duplicate
-def unique_list(list1):
-    print('ok')
-    toto = list(list1)
-    multiple_item = []
-    print(type(toto))
-    print(toto)
-    print('hera')
-    print(list1)
-    return multiple_item
+# def unique_list(list1):
+#     print('ok')
+#     toto = list(list1)
+#     multiple_item = []
+#     print(type(toto))
+#     print(toto)
+#     print('hera')
+#     print(list1)
+#     return multiple_item
+
     # for item in list1:
     #     print('kokokokoko')
     #     print(item)
@@ -77,6 +78,7 @@ def ApplyCosineSimi(cosine_para, places):
         print(place)
         result = (1 - spatial.distance.cosine(place, allnumlist)) * 100
         result1.append(float("{0:.2f}".format(result)))
+        # print(result1)
         # g = float("{0:.2f}".format(x))
     print(result1)
     return result1
@@ -95,69 +97,69 @@ def ApplyCosineSimi(cosine_para, places):
 
 
 #function to filter places
-def FilterPlaces(send):
-
-    toto = send['trekking'];
-
-    new = toto.replace('[', '')
-    new1 = new.replace(']', '')
-    # new2 = new1.replace(',', '')
-    new3 = new1.replace("'", '')
-    # new4 = new3.replace(' ', '')
-    new4 = list(new3.split(","))
-
-    print(type(new4))
-    print(new4)
-
-    store = []
-    for trek in new4:
-        if 'Walking' in trek:
-            value4 = Destination.objects.filter(
-            Q(trekking_type__contains="Walking")
-            )
-            print(type(value4))
-            print('waking')
-            print(set(value4))
-            store.append(value4)
-
-        if 'Cycling' in trek:
-            value5 = Destination.objects.filter(
-            Q(trekking_type__contains="Cycling")
-            )
-            print('cycling')
-            print(value5)
-            store.append(value5)
-        if 'Biking' in trek:
-            value6 = Destination.objects.filter(
-            Q(trekking_type__contains="Biking")
-            )
-            print('biking')
-            print(value6)
-            store.append(value6)
-        if 'Peak Climbing' in trek:
-            value7 = Destination.objects.filter(
-            Q(trekking_type__contains="Peak Climbing")
-            )
-            store.append(value7)
-        if 'Others' in trek:
-            value8 = Destination.objects.filter(
-            Q(trekking_type__contains="Others")
-            )
-            store.append(value8)
-
-    print('store')
-    print(store)
-    trekking_filtered = unique_list(store)
-    print('here')
-    print(trekking_filtered)
-    # seen = set()
-    # seen_add = seen.add
-    # seen_twice = set(x for x in store if x in seen or seen_add(x))
-
-    # print('here')
-    # print(seen_twice)
-
-    print('gogogoo')
+# def FilterPlaces(send):
+#
+#     toto = send['trekking'];
+#
+#     new = toto.replace('[', '')
+#     new1 = new.replace(']', '')
+#     # new2 = new1.replace(',', '')
+#     new3 = new1.replace("'", '')
+#     # new4 = new3.replace(' ', '')
+#     new4 = list(new3.split(","))
+#
+#     print(type(new4))
+#     print(new4)
+#
+#     store = []
+#     for trek in new4:
+#         if 'Walking' in trek:
+#             value4 = Destination.objects.filter(
+#             Q(trekking_type__contains="Walking")
+#             )
+#             print(type(value4))
+#             print('waking')
+#             print(set(value4))
+#             store.append(value4)
+#
+#         if 'Cycling' in trek:
+#             value5 = Destination.objects.filter(
+#             Q(trekking_type__contains="Cycling")
+#             )
+#             print('cycling')
+#             print(value5)
+#             store.append(value5)
+#         if 'Biking' in trek:
+#             value6 = Destination.objects.filter(
+#             Q(trekking_type__contains="Biking")
+#             )
+#             print('biking')
+#             print(value6)
+#             store.append(value6)
+#         if 'Peak Climbing' in trek:
+#             value7 = Destination.objects.filter(
+#             Q(trekking_type__contains="Peak Climbing")
+#             )
+#             store.append(value7)
+#         if 'Others' in trek:
+#             value8 = Destination.objects.filter(
+#             Q(trekking_type__contains="Others")
+#             )
+#             store.append(value8)
+#
+#     print('store')
+#     print(store)
+#     trekking_filtered = unique_list(store)
+#     print('here')
+#     print(trekking_filtered)
+#     # seen = set()
+#     # seen_add = seen.add
+#     # seen_twice = set(x for x in store if x in seen or seen_add(x))
+#
+#     # print('here')
+#     # print(seen_twice)
+#
+#     print('gogogoo')
 
     # print(ram)
     # print(gobo)
